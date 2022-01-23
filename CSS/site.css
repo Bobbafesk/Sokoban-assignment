@@ -1,15 +1,10 @@
 
 #playground{
-	background-color: aqua;
+	background-color: aqua; 
 	/*  Does not work really. The image is mirrored and also of 90 degree */
-	width:476px;	/*  470 Columns in Sokoban image 25px * 19 rows */
-	height:401px;	/*  325  Rows in Sokoban image 13x25px= 325 rows. 16x25=400px  */
+	width:475px;	/*  475 = 25px * 19 columns */
+	height:400px;	/*  400 =  25px x 16 rows */
 	
-}
-
-.player{
-	background-color: orange;
-	border-radius: 15px;
 }
 
  
@@ -43,5 +38,4 @@
 
 .G{	/* Goal spot for box */
 	background-color: crimson;
-	border-radius: 15px;
 }

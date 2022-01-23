@@ -49,9 +49,11 @@ function keyPressDown(event)
         case "ArrowRight":
             movePlayer(1, 0);
             break;
+
         case "ArrowLeft":
             movePlayer(-1, 0);
             break;
+
         default:
 
         break;
@@ -60,8 +62,7 @@ function keyPressDown(event)
 
 function movePlayer(x, y)
 {
-    // Check if it is possible to move player
-
+    
     var newY = player.y + y;
 	var newX = player.x + x; 
 	
@@ -69,15 +70,44 @@ function movePlayer(x, y)
 	var playerElement = document.getElementById("x"+ player.x + "y"+player.y);
 	var destinationElement = document.getElementById("x" + newX + "y" + newY);
 
+    // Check if it is possible to move player due to wall
     if (destinationElement.classList.contains("W"))
     {
         return;
     }
-    
-	
+	if (destinationElement.classList.contains("B"))
+    {
+        return;
+        moveBox(newX, newY, newX*2, n);//Har coded to test
+    }
+
+     
 	playerElement.classList.remove("P");
 	destinationElement.classList.add("P");
 	player.x = newX;
 	player.y = newY;
 }
+
+function moveBox(x, y, xDest, yDest)
+{
+    var boxElement = document.getElementById("x"+ x + "y"+ y);
+	var destinationElement = document.getElementById("x" + xDest + "y" + yDest);
+
+    // Check if it is possible to move box due to wall
+    if (destinationElement.classList.contains("W"))
+    {
+        return;
+    }
+        // Check if it is possible to move box due to box
+	if (destinationElement.classList.contains("B"))
+    {
+        return;
+    }
+
+     
+	boxElement.classList.remove("B");
+	destinationElement.classList.add("B");
+}
+
+
 initlizeMap();
