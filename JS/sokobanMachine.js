@@ -1,5 +1,7 @@
 const map = document.getElementById("playground")
 
+var goalElements = [];
+var keyPress = 0;
 document.body.addEventListener('keydown', keyPressDown);
 
 var player ={
@@ -22,6 +24,12 @@ function initlizeMap()
 				element.classList.add(tileMap01.mapGrid[row][col][0]);
 			}
 			element.id = "x" + col + "y" + row;
+
+            if(tileMap01.mapGrid[row][col][0] == 'G')
+            {
+                //goalElements.add(element);
+                goalElements.push(element);
+            }
 			
             //Check if player element => to set the player x and y
 			if(tileMap01.mapGrid[row][col][0] == 'P')
@@ -77,36 +85,61 @@ function movePlayer(x, y)
     }
 	if (destinationElement.classList.contains("B"))
     {
-        return;
-        moveBox(newX, newY, newX*2, n);//Har coded to test
+        
+       if( !moveBox(newX, newY, newX+x, newY+y))
+       {
+           return;
+       }
     }
-
+    
      
 	playerElement.classList.remove("P");
 	destinationElement.classList.add("P");
 	player.x = newX;
 	player.y = newY;
+
+    keyPress++; // Amount of key press
+    if (winCheck())
+    {
+        document.writeln
+        ("You solved the Sokoban in " + keyPress + " key presses!")
+    }
 }
 
-function moveBox(x, y, xDest, yDest)
+
+function winCheck() //min
 {
-    var boxElement = document.getElementById("x"+ x + "y"+ y);
+    for(let i=0; i < goalElements.length; i++)
+    {
+        if ( ! goalElements[i].classList.contains("B"))
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+function moveBox(xBox, yBox, xDest, yDest)
+{
+    var boxElement = document.getElementById("x"+ xBox + "y"+ yBox);
 	var destinationElement = document.getElementById("x" + xDest + "y" + yDest);
 
-    // Check if it is possible to move box due to wall
+    // Check if it is possible to move box due to next position is a wall.
     if (destinationElement.classList.contains("W"))
     {
-        return;
+        return false;
     }
-        // Check if it is possible to move box due to box
+        // Check if it is possible to move box due to another box. 
+        // It shall not be possible to move more than 1 box.
 	if (destinationElement.classList.contains("B"))
     {
-        return;
+        return false;
     }
-
-     
-	boxElement.classList.remove("B");
+    
+    boxElement.classList.remove("B");
 	destinationElement.classList.add("B");
+    return true;
 }
 
 

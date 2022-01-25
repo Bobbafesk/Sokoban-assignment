@@ -19,7 +19,7 @@
 	width:23px;
 	height:23px; 
 	border: 1px solid black;
-	background-color: black;
+	background-color: greenyellow;
 	float: left;
 }
 
@@ -34,8 +34,27 @@
 .P{	/* Player */
 	background-color: orange;
 	border-radius: 15px;
+	float: left;
 }
 
 .G{	/* Goal spot for box */
 	background-color: crimson;
+    width:23px;
+	height:23px; 
+	border: 1px solid black;
+	float: left;
+}
+
+.G.B{
+	background-color: greenyellow;
+    width:23px;
+	height:23px; 
+	border: 1px solid black;
+	float: left;
+}
+
+.G.P{
+	background-color: orange;
+	border-radius: 15px;
+	float: left;
 }
